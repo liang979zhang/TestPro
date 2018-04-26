@@ -52,6 +52,5 @@ dependencies {
     debugCompile 'com.uphyca:stetho_realm:2.1.0'
     //自己的数据库
     compile 'com.github.liang979zhang:Utils:1.22'
-
-
+    implementation files('libs/BaiduLBS_Android.jar')
 }

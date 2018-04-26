@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import face.com.zdl.testpro.baner.BannerActivity;
 import face.com.zdl.testpro.bottom.BottomActivity;
 import face.com.zdl.testpro.database.RealmActivity;
+import face.com.zdl.testpro.map.MapActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,5 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void databaseclick(View view) {
         startActivity(new Intent(MainActivity.this, RealmActivity.class));
+    }
+
+    public void mapclick(View view) {
+
+        startActivity(new Intent(MainActivity.this, MapActivity.class));
+
     }
 }
