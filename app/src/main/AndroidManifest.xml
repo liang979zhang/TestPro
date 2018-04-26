@@ -5,23 +5,24 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--//获取设备网络状态，禁用后无法获取网络状态-->
+    <!-- //获取设备网络状态，禁用后无法获取网络状态 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--//网络权限，当禁用后，无法进行检索等相关业务-->
+    <!-- //网络权限，当禁用后，无法进行检索等相关业务 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--//读取设备硬件信息，统计数据-->
+    <!-- //读取设备硬件信息，统计数据 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <!--//读取系统信息，包含系统版本等信息，用作统计-->
+    <!-- //读取系统信息，包含系统版本等信息，用作统计 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--//获取设备的网络状态，鉴权所需网络代理-->
+    <!-- //获取设备的网络状态，鉴权所需网络代理 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--//允许sd卡写权限，需写入地图数据，禁用后无法显示地图-->
+    <!-- //允许sd卡写权限，需写入地图数据，禁用后无法显示地图 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <!--//获取统计数据-->
+    <!-- //获取统计数据 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <!--//鉴权所需该权限获取进程列表-->
+    <!-- //鉴权所需该权限获取进程列表 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--//使用步行AR导航，配置Camera权限-->
+
+    <!-- //使用步行AR导航，配置Camera权限 -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -40,9 +41,32 @@
         <activity android:name=".baner.BannerActivity" />
         <activity android:name=".bottom.BottomActivity" />
         <activity android:name=".database.RealmActivity" />
-        <activity android:name=".map.MapActivity"></activity>
-
+        <activity android:name=".map.MapActivity" />
         <activity android:name="face.com.zdl.cctools.Permission.HelpActivity" />
+
+        <!-- 微信支付 -->
+        <activity
+            android:name="com.tsy.sdk.pay.weixin.WXPayCallbackActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity-alias
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.tsy.sdk.pay.weixin.WXPayCallbackActivity" />
+
+        <!-- 支付宝支付 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -51,8 +75,9 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
-        </service>
+            android:process=":remote" />
+
+        <activity android:name=".pay.PayActivity"></activity>
     </application>
 
 </manifest>

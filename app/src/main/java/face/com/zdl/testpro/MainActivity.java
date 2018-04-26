@@ -13,6 +13,7 @@ import face.com.zdl.testpro.baner.BannerActivity;
 import face.com.zdl.testpro.bottom.BottomActivity;
 import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.map.MapActivity;
+import face.com.zdl.testpro.pay.PayActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,5 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(MainActivity.this, MapActivity.class));
 
+    }
+
+    public void pay(View view) {
+        startActivity(new Intent(MainActivity.this, PayActivity.class));
     }
 }
