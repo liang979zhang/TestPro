@@ -2,6 +2,7 @@ package face.com.zdl.testpro.map;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -24,6 +25,8 @@ public class MapActivity extends AppCompatActivity {
 
     @BindView(R.id.bmapView)
     MapView mMapView;
+    @BindView(R.id.dw_bt)
+    Button dwBt;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient;
     private LatLng latLng;
@@ -36,6 +39,17 @@ public class MapActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mapset();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
+        if (!mLocationClient.isStarted()) {//如果定位client没有开启，开启定位
+            mLocationClient.start();
+        }
     }
 
     private void mapset() {
