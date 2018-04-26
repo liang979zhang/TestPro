@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 android {
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '111111'
+            storeFile file('D:/Android Project/TestPro/release/keys.jks')
+            storePassword '111111'
+        }
+        debug {
+            keyAlias 'key0'
+            keyPassword '111111'
+            storeFile file('D:/Android Project/TestPro/release/keys.jks')
+            storePassword '111111'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "face.com.zdl.testpro"
@@ -12,23 +26,24 @@ android {
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            signingConfig signingConfigs.release
+        }
     }
-
     realm {
         syncEnabled = true;
     }
-
-
-
-    sourceSets{
-        main{
+    sourceSets {
+        main {
             jniLibs.srcDir 'libs'
             //说明so的路径为该libs路径，关联所有地图SDK的so文件
         }
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

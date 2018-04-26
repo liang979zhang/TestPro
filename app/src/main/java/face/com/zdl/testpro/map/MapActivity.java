@@ -1,24 +1,42 @@
 package face.com.zdl.testpro.map;
 
+import android.Manifest;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Polyline;
+import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import face.com.zdl.cctools.Permission.PermissionResultCallBack;
+import face.com.zdl.cctools.Permission.PermissionUtil;
+import face.com.zdl.cctools.ToastUtils;
 import face.com.zdl.testpro.R;
 
 public class MapActivity extends AppCompatActivity {
@@ -27,6 +45,10 @@ public class MapActivity extends AppCompatActivity {
     MapView mMapView;
     @BindView(R.id.dw_bt)
     Button dwBt;
+    @BindView(R.id.btn_jietu)
+    Button btnJietu;
+    @BindView(R.id.iv_jitu)
+    ImageView ivJitu;
     private BaiduMap mBaiduMap;
     private LocationClient mLocationClient;
     private LatLng latLng;
@@ -38,63 +60,76 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         ButterKnife.bind(this);
 
+        PermissionUtil.getInstance().request(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_PHONE_STATE}, new PermissionResultCallBack() {
+            @Override
+            public void onPermissionGranted() {
+
+            }
+
+            @Override
+            public void onPermissionGranted(String... strings) {
+
+            }
+
+            @Override
+            public void onPermissionDenied(String... strings) {
+
+            }
+
+            @Override
+            public void onRationalShow(String... strings) {
+
+            }
+        });
+
+
         mapset();
-    }
+        dwBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isFirstLoc = true;
+                mBaiduMap.setMyLocationEnabled(true);
+                mLocationClient.start();
 
+            }
+        });
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        if (!mLocationClient.isStarted()) {//如果定位client没有开启，开启定位
-            mLocationClient.start();
-        }
+        btnJietu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+                    @Override
+                    public void onSnapshotReady(Bitmap bitmap) {
+                        ivJitu.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
+
     }
 
     private void mapset() {
 
-
         //获取地图控件引用
         mBaiduMap = mMapView.getMap();
-        //普通地图
-        mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-
         //默认显示普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
-        //开启交通图
-        //mBaiduMap.setTrafficEnabled(true);
-        //开启热力图
-        //mBaiduMap.setBaiduHeatMapEnabled(true);
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         //配置定位SDK参数
-        initLocation();
         mLocationClient.registerLocationListener(new MyListener());    //注册监听函数
+        initLocation();
         //开启定位
         mLocationClient.start();
         //图片点击事件，回到定位点
         mLocationClient.requestLocation();
 
 
-//        // 构造定位数据
-//        MyLocationData locData = new MyLocationData.Builder()
-//                .accuracy(location.getRadius())
-//                // 此处设置开发者获取到的方向信息，顺时针0-360
-//                .direction(100).latitude(location.getLatitude())
-//                .longitude(location.getLongitude()).build();
-
-// 设置定位数据
-//        mBaiduMap.setMyLocationData(locData);
-
-//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.gray_radius);
-//
+//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.mipmap.ic_maps_local_bar);
 //        //，包括定位模式、是否开启方向、设置自定义定位图标、精度圈填充颜色，精度圈边框颜色
 ////        定位精度圈大小 ，是根据当前定位精度自动控制的，无法手动控制大小。精度圈越小，代表当前定位精度越高；反之圈越大，代表当前定位精度越低。
-//        MyLocationConfiguration myLocationConfiguration = new MyLocationConfiguration(LocationMode.FOLLOWING, true, mCurrentMarker, R.color.colorAccent,R.color.colorPrimary);
+//        MyLocationConfiguration myLocationConfiguration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, mCurrentMarker, R.color.colorAccent, R.color.colorPrimary);
 //        mBaiduMap.setMyLocationConfiguration(myLocationConfiguration);
 
     }
@@ -115,8 +150,7 @@ public class MapActivity extends AppCompatActivity {
         option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
         option.setIgnoreKillProcess(false);
         option.setOpenGps(true); // 打开gps
-
-        //可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.setIgnoreKillProcess(false);  //可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
         option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
         option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
         mLocationClient.setLocOption(option);
@@ -131,7 +165,7 @@ public class MapActivity extends AppCompatActivity {
 
     private boolean isFirstLoc = true; // 是否首次定位
 
-    private class MyListener implements BDLocationListener {
+    private class MyListener extends BDAbstractLocationListener {
 
 
         @Override
@@ -145,6 +179,7 @@ public class MapActivity extends AppCompatActivity {
                     .longitude(location.getLongitude()).build();
             // 设置定位数据
             mBaiduMap.setMyLocationData(locData);
+
             // 当不需要定位图层时关闭定位图层
             //mBaiduMap.setMyLocationEnabled(false);
             if (isFirstLoc) {
@@ -174,6 +209,65 @@ public class MapActivity extends AppCompatActivity {
                     Toast.makeText(MapActivity.this, "手机模式错误，请检查是否飞行", Toast.LENGTH_SHORT).show();
                 }
             }
+
+            /**
+             *  String addr = location.getAddrStr();    //获取详细地址信息
+             String country = location.getCountry();    //获取国家
+             String province = location.getProvince();    //获取省份
+             String city = location.getCity();    //获取城市
+             String district = location.getDistrict();    //获取区县
+             String street = location.getStreet();    //获取街道信息
+             String locationDescribe = location.getLocationDescribe(); //获取位置描述信息
+             List<Poi> poiList = location.getPoiList();
+             //获取周边POI信息
+             //POI信息包括POI ID、名称等，具体信息请参照类参考中POI类的相关说明
+             */
+
+            // 显示个人位置图标
+            MyLocationData.Builder builder = new MyLocationData.Builder();
+            builder.latitude(location.getLatitude());
+            builder.longitude(location.getLongitude());
+            MyLocationData data = builder.build();
+            mBaiduMap.setMyLocationData(data);
+
+            final BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.mipmap.ic_maps_place);
+
+            OverlayOptions option = new MarkerOptions()
+                    .position(latLng)
+                    .icon(bitmap)
+                    .draggable(true);
+
+//            mBaiduMap.addOverlay(option);
+
+            mBaiduMap.setOnMapLongClickListener(new BaiduMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(LatLng latLng) {
+
+                    OverlayOptions option = new MarkerOptions()
+                            .position(latLng)
+                            .icon(bitmap);
+                    mBaiduMap.addOverlay(option);
+
+                }
+            });
+
+
+            LatLng p1 = new LatLng(34.2695, 117.2233369);
+            LatLng p2 = new LatLng(34.2695, 117.397428);
+            LatLng p3 = new LatLng(34.2695, 117.437428);
+            List<LatLng> points = new ArrayList<LatLng>();
+            points.add(p1);
+            points.add(p2);
+            points.add(p3);
+
+            //绘制折线
+            OverlayOptions ooPolyline = new PolylineOptions().width(10)
+                    .color(0xAAFF0000).points(points);
+            Polyline mPolyline = (Polyline) mBaiduMap.addOverlay(ooPolyline);
+
         }
     }
+
+
 }

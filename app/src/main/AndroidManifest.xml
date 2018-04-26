@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="face.com.zdl.testpro">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!--//获取设备网络状态，禁用后无法获取网络状态-->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -39,6 +41,8 @@
         <activity android:name=".bottom.BottomActivity" />
         <activity android:name=".database.RealmActivity" />
         <activity android:name=".map.MapActivity"></activity>
+
+        <activity android:name="face.com.zdl.cctools.Permission.HelpActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
