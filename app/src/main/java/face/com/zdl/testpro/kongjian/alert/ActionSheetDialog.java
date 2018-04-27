@@ -19,9 +19,7 @@ import java.util.List;
 import face.com.zdl.testpro.R;
 
 /**
- * Author: liuqiang
- * Time: 2018-01-02 13:28
- * Description:
+ * 仿ios底部弹出栏
  */
 public class ActionSheetDialog {
     private Context context;
