@@ -38,8 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".baner.BannerActivity" />
-        <activity android:name=".bottom.BottomActivity" />
+        <activity android:name=".kongjian.baner.BannerActivity" />
+        <activity android:name=".kongjian.bottom.BottomActivity" />
         <activity android:name=".database.RealmActivity" />
         <activity android:name=".map.MapActivity" />
         <activity android:name="face.com.zdl.cctools.Permission.HelpActivity" />
@@ -77,7 +77,8 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".pay.PayActivity"></activity>
+        <activity android:name=".pay.PayActivity" />
+        <activity android:name=".kongjian.imagesel.ImgSelActivity"></activity>
     </application>
 
 </manifest>

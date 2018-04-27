@@ -1,4 +1,4 @@
-package face.com.zdl.testpro.baner;
+package face.com.zdl.testpro.kongjian.baner;
 
 import android.content.Context;
 import android.widget.ImageView;

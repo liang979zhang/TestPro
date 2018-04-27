@@ -1,4 +1,4 @@
-package face.com.zdl.testpro.baner;
+package face.com.zdl.testpro.kongjian.baner;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
