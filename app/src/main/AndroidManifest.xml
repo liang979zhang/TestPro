@@ -79,6 +79,8 @@
 
         <activity android:name=".pay.PayActivity" />
         <activity android:name=".kongjian.imagesel.ImgSelActivity"></activity>
+
+        <activity android:name=".kongjian.DragActivity" />
     </application>
 
 </manifest>

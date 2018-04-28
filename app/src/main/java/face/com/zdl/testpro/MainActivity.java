@@ -9,9 +9,9 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.kongjian.baner.BannerActivity;
 import face.com.zdl.testpro.kongjian.bottom.BottomActivity;
+import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.kongjian.imagesel.ImgSelActivity;
 import face.com.zdl.testpro.map.MapActivity;
 import face.com.zdl.testpro.pay.PayActivity;
@@ -46,8 +46,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, BannerActivity.class));
                 break;
             case R.id.btn_paoma:
-                startActivity(new Intent(MainActivity.this, BottomActivity.class));
+//                startActivity(new Intent(MainActivity.this, BottomActivity.class));
+                startActivity(new Intent(MainActivity.this, DragActivity.class));
 
+//                ActionSheetDialog actionSheetDialog = new ActionSheetDialog(this);
+//                actionSheetDialog.builder().addSheetItem("aaaa", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+//                    @Override
+//                    public void onClick(int which) {
+//
+//                    }
+//                })
+//                        .addSheetItem("aaaa", ActionSheetDialog.SheetItemColor.Blue, new ActionSheetDialog.OnSheetItemClickListener() {
+//                            @Override
+//                            public void onClick(int which) {
+//
+//                            }
+//                        })
+//                        .setTitle("addadad")
+//                        .setCancelable(true)
+//                        .show();
                 break;
         }
     }
