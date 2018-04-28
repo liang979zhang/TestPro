@@ -9,9 +9,9 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.kongjian.baner.BannerActivity;
 import face.com.zdl.testpro.kongjian.bottom.BottomActivity;
-import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.kongjian.imagesel.ImgSelActivity;
 import face.com.zdl.testpro.map.MapActivity;
 import face.com.zdl.testpro.pay.PayActivity;
@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        addView();
+    }
+
+    private void addView() {
+//        MoveImageView moveImageView = new MoveImageView(this);
+
     }
 
     @OnClick({R.id.btn_banner, R.id.btn_paoma})
