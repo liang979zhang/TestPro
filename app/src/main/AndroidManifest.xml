@@ -78,9 +78,9 @@
             android:process=":remote" />
 
         <activity android:name=".pay.PayActivity" />
-        <activity android:name=".kongjian.imagesel.ImgSelActivity"></activity>
-
+        <activity android:name=".kongjian.imagesel.ImgSelActivity" />
         <activity android:name=".kongjian.DragActivity" />
+        <activity android:name=".kongjian.recy.ChexboxRecActivity"></activity>
     </application>
 
 </manifest>

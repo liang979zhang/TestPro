@@ -16,6 +16,7 @@ import face.com.zdl.testpro.kongjian.baner.BannerActivity;
 import face.com.zdl.testpro.kongjian.bottom.BottomActivity;
 import face.com.zdl.testpro.database.RealmActivity;
 import face.com.zdl.testpro.kongjian.imagesel.ImgSelActivity;
+import face.com.zdl.testpro.kongjian.recy.ChexboxRecActivity;
 import face.com.zdl.testpro.map.MapActivity;
 import face.com.zdl.testpro.pay.PayActivity;
 
@@ -80,5 +81,9 @@ public class MainActivity extends AppCompatActivity {
     public void imgsel(View view) {
         startActivity(new Intent(MainActivity.this, ImgSelActivity.class));
 
+    }
+
+    public void kongjian(View view) {
+        startActivity(new Intent(this, ChexboxRecActivity.class));
     }
 }

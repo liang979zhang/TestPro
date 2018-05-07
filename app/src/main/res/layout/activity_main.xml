@@ -42,5 +42,11 @@
         android:onClick="imgsel"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:text="控件"
+        android:onClick="kongjian"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
