@@ -9,6 +9,8 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import face.com.zdl.testpro.dsbrige.DesBrigeActivity;
+import face.com.zdl.testpro.kongjian.DragActivity;
 import face.com.zdl.testpro.kongjian.baner.BannerActivity;
 import face.com.zdl.testpro.kongjian.bottom.BottomActivity;
 import face.com.zdl.testpro.database.RealmActivity;
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void kongjian(View view) {
-        startActivity(new Intent(this, ChexboxRecActivity.class));
+//        startActivity(new Intent(this, ChexboxRecActivity.class));
+        startActivity(new Intent(this, DesBrigeActivity.class));
+
     }
 }

@@ -80,6 +80,7 @@ dependencies {
 
 //    alertdialog https://github.com/jjdxmashl/jjdxm_dialogui/
     compile 'com.dou361.dialogui:jjdxm-dialogui:1.0.1'
+    compile 'com.github.wendux:DSBridge-Android:master-SNAPSHOT'//DSBridge
 
 
 }
